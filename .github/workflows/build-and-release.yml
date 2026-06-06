@@ -107,6 +107,12 @@ jobs:
           echo '      git clone https://github.com/ONLYOFFICE/$sub.git $sub 2>/dev/null || true' >> patch.txt
           echo '    fi' >> patch.txt
           echo '  done' >> patch.txt
+          echo '  # Create stub .docker directories expected by docker-bake contexts' >> patch.txt
+          echo '  for d in core desktop-apps desktop-sdk sdkjs web-apps dictionaries; do' >> patch.txt
+          echo '    if [ ! -d "$d/.docker" ]; then' >> patch.txt
+          echo '      mkdir -p "$d/.docker" 2>/dev/null || true' >> patch.txt
+          echo '    fi' >> patch.txt
+          echo '  done' >> patch.txt
           echo '  cd ".."' >> patch.txt
 
           # Inject the patch.txt contents immediately BEFORE the 'cd "DesktopEditors/build"' command 
